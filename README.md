@@ -54,6 +54,7 @@ Conv2D(32) -> MaxPool
 Conv2D(64) -> MaxPool
 Conv2D(64) -> Flatten -> Dense(64) -> Dense(10)
 ```
+<!--
 
 ### Enhanced Model (Recommended)
 
@@ -65,7 +66,7 @@ Flatten -> Dense(128) -> BatchNorm -> Dropout(0.5) -> Dense(10)
 ```
 
 Both models are compiled with **Adam optimizer** and `SparseCategoricalCrossentropy(from_logits=True)` loss.
-
+-->
 ## Installation
 
 ### Prerequisites
@@ -250,8 +251,8 @@ GET /classes
 
 Interactive API documentation is available at:
 
-- Swagger UI: `http://localhost:8000/docs`
-- ReDoc: `http://localhost:8000/redoc`
+-  `http://localhost:8000/`
+-  `http://localhost:8000/predict`
 
 ### Example Python Client
 
@@ -265,7 +266,7 @@ with open('test_image.jpg', 'rb') as f:
     print(response.json())
 
 # Get model info
-response = requests.get('http://localhost:8000/model/info')
+response = requests.get('http://localhost:8000/')
 print(response.json())
 ```
 
@@ -310,36 +311,17 @@ docker run -p 8000:8000 cifar10-classifier
 
 ```
 cifar10-cnn-classifier/
-├── source/
+├── src/
 │   ├── __init__.py
 │   ├── main.py              # Original notebook functionality
-│   ├── train.py             # Enhanced training script
+│   ├── model.py             # Model architectures
 │   ├── config.py            # Configuration settings
-│   ├── models/
-│   │   ├── __init__.py
-│   │   └── cnn_model.py     # Model architectures
-│   ├── utils/
-│   │   ├── __init__.py
-│   │   ├── data_loader.py   # Data loading utilities
-│   │   └── visualization.py # Plotting functions
-│   └── api/
-│       ├── __init__.py
-│       ├── app.py           # FastAPI application
-│       └── schemas.py       # Pydantic schemas
 ├── tests/
 │   ├── __init__.py
 │   └── test_model.py        # Unit tests
-├── sample/
-│   ├── plots/               # Generated plots
-│   └── images/              # Sample images
-├── data/                    # Dataset cache
-├── checkpoints/             # Model checkpoints
-├── logs/                    # Training logs
 ├── requirements.txt         # Dependencies
-├── requirements-dev.txt     # Dev dependencies
 ├── Makefile                 # Convenience commands
 ├── README.md               # This file
-├── Dockerfile              # Docker configuration
 └── .gitignore              # Git ignore rules
 ```
 
@@ -398,4 +380,4 @@ If you use this code in your research, please cite:
 
 ## Support
 
-For questions or issues, please open an issue on GitHub or contact [your-email@example.com]
+For questions or issues, please open an issue on GitHub or contact [alihaltaweel@gmail.com]
