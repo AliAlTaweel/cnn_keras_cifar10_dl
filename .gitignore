@@ -73,7 +73,15 @@ saved_model/
 # Matplotlib
 *.png
 !sample/.gitkeep
-# Virtual environments
+# Python virtual environments
 venv/
+venv_cnn/
 venv_cnn_keras/
 .env/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
