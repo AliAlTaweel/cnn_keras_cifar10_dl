@@ -1,6 +1,6 @@
 # CIFAR-10 CNN Classifier
 
-**Project:** `cifar10-cnn-classifier`
+**Project:** `cnn_keras_cifar10_dl`
 
 ## Overview
 
@@ -10,19 +10,19 @@ The project includes both a command-line training interface and a **FastAPI REST
 
 ## Contents
 
-* `source/main.py` — main training and evaluation code (functions: `load_data`, `build_model`, `train`, `evaluate`)
-* `source/train.py` — enhanced training script with callbacks and evaluation
-* `source/config.py` — centralized configuration settings
-* `source/models/cnn_model.py` — model architecture definitions
-* `source/utils/data_loader.py` — data loading and preprocessing utilities
-* `source/utils/visualization.py` — plotting and visualization functions
-* `source/api/app.py` — FastAPI application for serving predictions
-* `source/api/schemas.py` — Pydantic schemas for API validation
-* `sample/` — directory for sample images and generated plots
-* `tests/test_model.py` — basic tests that ensure model and data shapes are correct
-* `Makefile` — convenience commands (`train`, `test`, `clean`, `api`)
-* `requirements.txt` — runtime dependencies
-* `Dockerfile` — Docker configuration for containerized deployment
+- `source/main.py` — main training and evaluation code (functions: `load_data`, `build_model`, `train`, `evaluate`)
+- `source/train.py` — enhanced training script with callbacks and evaluation
+- `source/config.py` — centralized configuration settings
+- `source/models/cnn_model.py` — model architecture definitions
+- `source/utils/data_loader.py` — data loading and preprocessing utilities
+- `source/utils/visualization.py` — plotting and visualization functions
+- `source/api/app.py` — FastAPI application for serving predictions
+- `source/api/schemas.py` — Pydantic schemas for API validation
+- `sample/` — directory for sample images and generated plots
+- `tests/test_model.py` — basic tests that ensure model and data shapes are correct
+- `Makefile` — convenience commands (`train`, `test`, `clean`, `api`)
+- `requirements.txt` — runtime dependencies
+- `Dockerfile` — Docker configuration for containerized deployment
 
 ## Dataset
 
@@ -37,6 +37,7 @@ https://storage.googleapis.com/tensorflow/tf-keras-datasets/cifar-10-batches-py.
 ### Classes
 
 The dataset contains 10 classes:
+
 - airplane
 - automobile
 - bird
@@ -53,6 +54,7 @@ The dataset contains 10 classes:
 The project provides two model architectures:
 
 ### Simple Model (Notebook Architecture)
+
 ```
 Conv2D(32) -> MaxPool
 Conv2D(64) -> MaxPool
@@ -60,6 +62,7 @@ Conv2D(64) -> Flatten -> Dense(64) -> Dense(10)
 ```
 
 ### Enhanced Model (Recommended)
+
 ```
 Conv2D(32) x2 -> BatchNorm -> MaxPool -> Dropout(0.2)
 Conv2D(64) x2 -> BatchNorm -> MaxPool -> Dropout(0.3)
@@ -72,18 +75,21 @@ Both models are compiled with **Adam optimizer** and `SparseCategoricalCrossentr
 ## Installation
 
 ### Prerequisites
+
 - Python 3.8+
 - pip
 
 ### Setup
 
 1. Clone the repository:
+
 ```bash
-git clone https://github.com/yourusername/cifar10-cnn-classifier.git
-cd cifar10-cnn-classifier
+git clone https://github.com/AliAlTaweel/cnn_keras_cifar10_dl.git
+cd cnn_keras_cifar10_dl
 ```
 
 2. Install dependencies:
+
 ```bash
 make install
 # or
@@ -91,6 +97,7 @@ pip install -r requirements.txt
 ```
 
 3. Create project structure:
+
 ```bash
 make setup
 # or
@@ -102,6 +109,7 @@ python create_structure.py
 ### Quick Start
 
 Train with default settings (enhanced model):
+
 ```bash
 make train
 # or
@@ -109,6 +117,7 @@ python -m source.train --epochs 10 --batch-size 64
 ```
 
 Train with simple model (matching notebook):
+
 ```bash
 make train-simple
 # or
@@ -131,6 +140,7 @@ Options:
 ### Training Features
 
 The training routine includes:
+
 - **Model checkpointing**: Saves best model based on validation accuracy
 - **Early stopping**: Stops training if validation loss doesn't improve
 - **Learning rate scheduling**: Reduces learning rate on plateau
@@ -144,11 +154,13 @@ The training routine includes:
 ## Evaluation & Metrics
 
 After training, the script computes predictions on the test set and prints:
+
 - **Classification report** (precision, recall, f1-score for each class)
 - **Confusion matrix** (saved as a heatmap)
 - **Per-class accuracy**
 
 Evaluate an existing model:
+
 ```bash
 make eval
 # or
@@ -170,17 +182,20 @@ uvicorn source.api.app:app --host 0.0.0.0 --port 8000 --reload
 ### API Endpoints
 
 #### 1. Health Check
+
 ```bash
 GET /
 GET /health
 ```
 
 #### 2. Model Information
+
 ```bash
 GET /model/info
 ```
 
 Response:
+
 ```json
 {
   "model_name": "CIFAR-10 CNN Classifier",
@@ -193,12 +208,14 @@ Response:
 ```
 
 #### 3. Single Image Prediction
+
 ```bash
 POST /predict
 Content-Type: multipart/form-data
 ```
 
 Example using curl:
+
 ```bash
 curl -X POST "http://localhost:8000/predict" \
   -H "accept: application/json" \
@@ -207,6 +224,7 @@ curl -X POST "http://localhost:8000/predict" \
 ```
 
 Response:
+
 ```json
 {
   "predicted_class": "airplane",
@@ -222,12 +240,14 @@ Response:
 ```
 
 #### 4. Batch Prediction
+
 ```bash
 POST /predict/batch
 Content-Type: multipart/form-data
 ```
 
 #### 5. Get Classes
+
 ```bash
 GET /classes
 ```
@@ -235,6 +255,7 @@ GET /classes
 ### API Documentation
 
 Interactive API documentation is available at:
+
 - Swagger UI: `http://localhost:8000/docs`
 - ReDoc: `http://localhost:8000/redoc`
 
@@ -257,6 +278,7 @@ print(response.json())
 ## Tests
 
 Run tests with:
+
 ```bash
 make test
 # or
@@ -266,6 +288,7 @@ python -m unittest discover -v
 ```
 
 The test suite includes:
+
 - Model architecture validation
 - Data loading and preprocessing tests
 - Configuration verification
@@ -274,6 +297,7 @@ The test suite includes:
 ## Docker Deployment
 
 ### Build Docker Image
+
 ```bash
 make docker-build
 # or
@@ -281,6 +305,7 @@ docker build -t cifar10-classifier .
 ```
 
 ### Run Docker Container
+
 ```bash
 make docker-run
 # or
