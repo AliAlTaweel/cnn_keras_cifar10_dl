@@ -10,19 +10,13 @@ The project includes both a command-line training interface and a **FastAPI REST
 
 ## Contents
 
-- `source/main.py` — main training and evaluation code (functions: `load_data`, `build_model`, `train`, `evaluate`)
-- `source/train.py` — enhanced training script with callbacks and evaluation
-- `source/config.py` — centralized configuration settings
-- `source/models/cnn_model.py` — model architecture definitions
-- `source/utils/data_loader.py` — data loading and preprocessing utilities
-- `source/utils/visualization.py` — plotting and visualization functions
-- `source/api/app.py` — FastAPI application for serving predictions
-- `source/api/schemas.py` — Pydantic schemas for API validation
-- `sample/` — directory for sample images and generated plots
+- `src/model.py` — model architecture definitions
+- `src/app.py` — FastAPI application for serving predictions
+- `src/predict.py` — main training and evaluation code (functions: `load_data`, `build_model`, `train`, `evaluate`)
 - `tests/test_model.py` — basic tests that ensure model and data shapes are correct
 - `Makefile` — convenience commands (`train`, `test`, `clean`, `api`)
 - `requirements.txt` — runtime dependencies
-- `Dockerfile` — Docker configuration for containerized deployment
+- `requirements.txt` — development dependencies
 
 ## Dataset
 
